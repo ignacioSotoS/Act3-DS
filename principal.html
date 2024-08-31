@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>La among página </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+  <body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <div id="act3"></div>
+    
+    <script type="text/babel">
+      function Header({texto}){
+        return <h1>{texto ? texto : "esto es un titulo"}</h1>;
+      }
+
+      function Header2({texto}){
+        return <h2>{texto ? texto : "esto es una descripción"}</h2>;
+      }
+
+      function ImageToggle(){
+        const [isToggled, setIsToggled] = React.useState(false);
+        function handleToggle(){
+          setIsToggled(!isToggled);
+        }
+        return <button onClick={handleToggle} className={`image-button ${isToggled ? "activated" : "desactivated"}`}></button>;
+      }
+
+      function Boton(){
+        const [likes, setLikes] = React.useState(0);
+        function handleClick() {
+          setLikes(likes + 1);
+        }
+        return (<button onClick={handleClick}>Me gusta: {likes} </button>)
+      }
+
+      function ImageResizer() {
+        const [size, setSize] = React.useState(0); 
+        function increaseSize(){
+          setSize(size + 20); 
+        };
+        function resetSize(){
+          setSize(size - 20); 
+        };
+      return (
+          <div>
+            <div>
+              <button onClick={increaseSize}> Aumentar sonido de la radio </button>
+              <button onClick={resetSize}> Bajar el sonido de la radio </button>
+            </div>
+            <img src="Shh among.jpg" style={{ width: size, height: 'auto' }}/>
+          </div>
+        );
+      }
+
+      function HomePage() {
+        return (
+          <div>
+            <Header texto="Among Us"/> 
+            <Header2 texto="te gusta como son? dale likes y conocelos un poco: actualemente hay 18 colores que puedes elegir a la hora de jugar"/>
+            <img src="personajes.jpg" alt="Personajes originales del juego" className="image"/><br/>
+            <Boton />
+            <Header2 texto="¿¿sabías que podias matar un among us dandole click?? :("/>
+            <ImageToggle />
+            <h4> Lo bueno es que lo puedes revivir de la misma forma :) <br/> para eso se uso un Toggle </h4>
+            <Header2 texto="cuenta la leyenda de que hay un among us que le desagrada la radio de su nave..."/>
+            <ImageResizer />
+          </div>
+        );
+      }
+      
+      const root = ReactDOM.createRoot(act3);
+      root.render(<HomePage />);
+    </script>
+  </body>
+</html>
